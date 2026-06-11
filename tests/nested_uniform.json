@@ -1,0 +1,22 @@
+[
+  {"id": 1, "name": "Alice Johnson", "address": {"city": "Moscow", "zip": "101000", "country": "RU"}, "score": 98.5, "active": true},
+  {"id": 2, "name": "Bob Smith", "address": {"city": "Saint Petersburg", "zip": "190000", "country": "RU"}, "score": 87.2, "active": true},
+  {"id": 3, "name": "Carol White", "address": {"city": "Kazan", "zip": "420000", "country": "RU"}, "score": 45.0, "active": false},
+  {"id": 4, "name": "David Brown", "address": {"city": "Novosibirsk", "zip": "630000", "country": "RU"}, "score": 92.1, "active": true},
+  {"id": 5, "name": "Eva Martinez", "address": {"city": "Yekaterinburg", "zip": "620000", "country": "RU"}, "score": 76.8, "active": true},
+  {"id": 6, "name": "Frank Lee", "address": {"city": "Nizhny Novgorod", "zip": "603000", "country": "RU"}, "score": 99.0, "active": true},
+  {"id": 7, "name": "Grace Kim", "address": {"city": "Chelyabinsk", "zip": "454000", "country": "RU"}, "score": 31.5, "active": false},
+  {"id": 8, "name": "Henry Wang", "address": {"city": "Samara", "zip": "443000", "country": "RU"}, "score": 88.4, "active": true},
+  {"id": 9, "name": "Irene Petrov", "address": {"city": "Omsk", "zip": "644000", "country": "RU"}, "score": 71.3, "active": true},
+  {"id": 10, "name": "Jake Ivanov", "address": {"city": "Rostov-on-Don", "zip": "344000", "country": "RU"}, "score": 65.9, "active": false},
+  {"id": 11, "name": "Kate Sidorov", "address": {"city": "Ufa", "zip": "450000", "country": "RU"}, "score": 83.7, "active": true},
+  {"id": 12, "name": "Leo Kozlov", "address": {"city": "Krasnoyarsk", "zip": "660000", "country": "RU"}, "score": 54.2, "active": true},
+  {"id": 13, "name": "Mia Novikov", "address": {"city": "Voronezh", "zip": "394000", "country": "RU"}, "score": 90.1, "active": true},
+  {"id": 14, "name": "Nick Volkov", "address": {"city": "Perm", "zip": "614000", "country": "RU"}, "score": 78.6, "active": false},
+  {"id": 15, "name": "Olga Lebedev", "address": {"city": "Volgograd", "zip": "400000", "country": "RU"}, "score": 67.4, "active": true},
+  {"id": 16, "name": "Paul Morozov", "address": {"city": "Saratov", "zip": "410000", "country": "RU"}, "score": 95.3, "active": true},
+  {"id": 17, "name": "Quinn Popov", "address": {"city": "Tyumen", "zip": "625000", "country": "RU"}, "score": 42.8, "active": false},
+  {"id": 18, "name": "Rosa Sokolov", "address": {"city": "Togliatti", "zip": "445000", "country": "RU"}, "score": 86.9, "active": true},
+  {"id": 19, "name": "Sam Mikhailov", "address": {"city": "Krasnodar", "zip": "350000", "country": "RU"}, "score": 73.1, "active": true},
+  {"id": 20, "name": "Tina Fedorov", "address": {"city": "Irkutsk", "zip": "664000", "country": "RU"}, "score": 59.5, "active": true}
+]

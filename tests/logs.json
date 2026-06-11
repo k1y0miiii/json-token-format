@@ -1,0 +1,12 @@
+[
+  {"id": 1001, "ts": "2024-11-18T08:14:23Z", "level": "error", "service": "auth-api", "ip": "172.16.4.21", "msg": "Auth failed for user admin@corp.ru", "code": "AUTH_401"},
+  {"id": 1002, "ts": "2024-11-18T08:14:31Z", "level": "info", "service": "auth-api", "ip": "10.0.1.5", "msg": "Login successful", "code": "OK_200"},
+  {"id": 1003, "ts": "2024-11-18T08:15:02Z", "level": "warn", "service": "doc-processor", "ip": "10.0.2.8", "msg": "Document size exceeds recommended limit", "code": "WARN_413"},
+  {"id": 1004, "ts": "2024-11-18T08:15:44Z", "level": "info", "service": "plagiat-engine", "ip": "10.0.3.12", "msg": "Check completed in 1847ms", "code": "OK_200"},
+  {"id": 1005, "ts": "2024-11-18T08:16:09Z", "level": "error", "service": "storage", "ip": "10.0.4.3", "msg": "S3 timeout after 30s", "code": "ERR_504"},
+  {"id": 1006, "ts": "2024-11-18T08:16:55Z", "level": "info", "service": "doc-processor", "ip": "10.0.2.9", "msg": "Batch job started: 24 documents", "code": "OK_202"},
+  {"id": 1007, "ts": "2024-11-18T08:17:33Z", "level": "warn", "service": "rate-limiter", "ip": "185.12.45.67", "msg": "Rate limit approaching for IP", "code": "WARN_429"},
+  {"id": 1008, "ts": "2024-11-18T08:18:11Z", "level": "error", "service": "plagiat-engine", "ip": "10.0.3.12", "msg": "Index connection lost, reconnecting", "code": "ERR_503"},
+  {"id": 1009, "ts": "2024-11-18T08:18:47Z", "level": "info", "service": "auth-api", "ip": "10.0.1.7", "msg": "Token refreshed", "code": "OK_200"},
+  {"id": 1010, "ts": "2024-11-18T08:19:22Z", "level": "info", "service": "plagiat-engine", "ip": "10.0.3.11", "msg": "Check completed in 923ms", "code": "OK_200"}
+]
