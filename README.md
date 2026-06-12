@@ -1,81 +1,80 @@
 # jtf — JSON Token Format v2
 
-English version: [README.en.md](README.en.md).
+**English** · [Русский](README.ru.md)
 
-Компактное представление JSON без потерь, которое уменьшает число токенов tiktoken
-при передаче структурных данных в LLM. Преобразование обратимо: `decode(encode(x))`
-всегда равно `x`.
+A lossless, round-trippable encoding of the JSON data model that reduces tiktoken
+token count when passing structured data to LLMs.
 
-## Спецификация формата
+## Format spec
 
-### Примитивы
+### Primitives
 
-`null`, `true`, `false` пишутся как есть. Числа — в каноничной форме JSON (без лишних
-нулей). Строки без кавычек, когда это безопасно; иначе — в двойных кавычках со
-стандартным JSON-экранированием.
+`null`, `true`, `false` written literally. Numbers in canonical JSON form (no
+trailing zeros). Strings are unquoted when safe; double-quoted with standard JSON
+escape sequences otherwise.
 
-Строку можно оставить без кавычек, если она:
-- непустая и не совпадает с `null`/`true`/`false`;
-- без пробелов в начале и конце;
-- не содержит `= : | " \ # [ ] { } $ @`, табуляцию и перевод строки;
-- не будет ошибочно прочитана как число или булево при декодировании.
+A string is safe to leave unquoted when it:
+- is non-empty and not `null`/`true`/`false`
+- has no leading/trailing whitespace
+- contains none of `= : | " \ # [ ] { } $ @ tab newline`
+- would not be mis-parsed as a number or boolean on decode
 
-Строки, похожие на числа (`"007"`, `"3.14"`, `"1e5"`), всегда берутся в кавычки —
-иначе round-trip был бы с потерями.
+Numeric-looking strings (`"007"`, `"3.14"`, `"1e5"`) are always double-quoted to
+prevent lossy round-trips.
 
-### Объекты (отступ табуляцией)
+### Objects (tab-indented)
 
 ```
-ключ=значение      <- примитив (разделитель «=», экономит 1 токен против «ключ: значение»)
-ключ:              <- вложенный блок на следующих строках с отступом
-    потомок=...
+key=value          <- primitive value (= separator, 1 token)
+key:               <- nested block follows on next indented lines
+    child=...
 ```
 
-Один таб на уровень вложенности. Пустой объект: `{}`.
+Nesting uses one tab per level. Empty object: `{}`.
 
-### Массивы
+### Arrays
 
-**Пустой:** `[0]`
+**Empty:** `[0]`
 
-**Примитивы (в строку, через запятую):**
+**Primitive (inline, comma-separated):**
 ```
 [N] v1,v2,v3
 ```
 
-**Таблица — плоские однотипные объекты (одинаковые ключи, значения-примитивы):**
+**Tabular — flat-uniform objects (all items share same keys, all-primitive values):**
 ```
 #N k1 k2 k3
     v1    v2    v3
     v4    v5    v6
 ```
-Заголовок — `#N` и имена ключей через пробел. Строки с отступом-табом, ячейки через
-таб. Ключи с пробелами или спецсимволами — через префикс `csv:`:
+Header is `#N` followed by space-separated key names. Rows are tab-indented, cells
+are tab-separated. Keys with spaces or special characters use a `csv:` prefix:
 ```
-#N csv:"ключ один","ключ два"
-    ячейка1    ячейка2
+#N csv:"key one","key two"
+    cell1    cell2
 ```
 
-**Таблица — вложенно-однотипные объекты (одинаковая форма с вложенными словарями,
-листовые значения — примитивы):** тот же заголовок `#N`, но ключи — точечные пути:
+**Tabular — nested-uniform objects (uniform with nested dicts, all leaf values
+primitive):** same `#N` header format, but keys use dotted paths:
 ```
 #N id addr.city addr.zip
-    1    Москва    101000
-    2    Казань    420000
+    1    Moscow    101000
+    2    Kazan     420000
 ```
-При декодировании точечные пути восстанавливают вложенную структуру.
+On decode, dotted paths reconstruct the nested dict structure.
 
-**Смешанные/разнородные (список через дефис):**
+**Mixed/heterogeneous (dash list):**
 ```
 [N]
     - 42
-    - какая-то строка
+    - some string
     - k=v
 ```
 
-### Словарь значений (опционально)
+### Value dictionary (optional)
 
-Когда одни и те же строковые значения повторяются и замена экономит токены (с учётом
-накладных расходов заголовка), сверху добавляется блок словаря:
+When the same string values appear repeatedly and substitution saves tokens (net of
+the header overhead), a dictionary block is prepended:
 
 ```
 #vdf:v2
@@ -85,15 +84,15 @@ English version: [README.en.md](README.en.md).
 #end
 ```
 
-`=` — точное совпадение, `~=` — префикс (например, URL). В теле `$0` подставляет
-значение целиком, `{$1}42` разворачивается в «префикс + суффикс». Ключи никогда не
-заменяются, только значения.
+`=` declares an exact match; `~=` declares a URL prefix. In the body, `$0` replaces
+exact values and `{$1}42` expands to the prefix + suffix. Keys are never replaced,
+only values.
 
-Словарь не добавляется, если суммарная экономия от всех записей не превышает накладные
-расходы заголовка (12 токенов) плюс минимум 2 токена на запись. Это исключает регрессию
-на документах с малым числом повторов.
+The dictionary is omitted when the total token savings from all entries do not exceed
+the header/footer overhead (12 tokens) plus a per-entry minimum of 2 tokens net. This
+prevents regressions on documents with few repeated strings.
 
-### Набросок грамматики
+### Grammar sketch
 
 ```
 document  ::= ("#vdf:v2" CRLF "#dict:" CRLF entry* "#end" CRLF)? body
@@ -110,47 +109,81 @@ prim_val  ::= bare_string | quoted_string | "null" | "true" | "false" | number
             | "$" digits | "{$" digits "}" suffix
 ```
 
-### Пример — массив вложенно-однотипных объектов
+### Worked example — nested uniform array
 
-Вход (`nested_uniform.json`, сокращённо):
+Input (`nested_uniform.json`, abbreviated):
 ```json
-[{"id":1,"address":{"city":"Москва","zip":"101000"},"score":98.5,"active":true}, ...]
+[{"id":1,"address":{"city":"Moscow","zip":"101000"},"score":98.5,"active":true}, ...]
 ```
 
-JTF v2:
+JTF v2 output:
 ```
 #20 id name address.city address.zip score active
-    1    Алиса    Москва    101000    98.5    true
-    2    Борис    Санкт-Петербург    190000    87.2    true
+    1    Alice Johnson    Moscow    101000    98.5    true
+    2    Bob Smith    Saint Petersburg    190000    87.2    true
     ...
 ```
 
-Точечные ключи `address.city` и `address.zip` убирают повторяющиеся имена вложенных
-ключей. Декодер режет по `.` и восстанавливает `{"address": {"city": ..., "zip": ...}}`.
+Dotted-path header `address.city` and `address.zip` eliminate the nested key names
+entirely. The decoder splits on `.` to reconstruct `{"address": {"city": ..., "zip": ...}}`.
 
-## Бенчмарк (tiktoken cl100k_base, измерено)
+### Worked example — value dictionary
 
-| файл | JSON компактный | JTF v1 | JTF v2 | v2 к JSON | v2 к v1 |
-|------|-----------------|--------|--------|-----------|---------|
+Input (`repeated_values.json`, 15 rows with repeated `status`, `plan`, `region`,
+`created`, and URL fields):
+
+```
+#vdf:v2
+#dict:
+  $0=eu-west-1
+  $1=active
+  $2=premium
+  $3=gold
+  $4="2024-11-18T00:00:00Z"
+  $5~=https://api.example.com/v2/users/
+  $6=basic
+  $7=silver
+  $8=pending
+  $9=us-east-1
+  $10=bronze
+  $11=suspended
+  $12=ap-south-1
+  $13=enterprise
+  $14=platinum
+#end
+#15 id status plan region url created tier
+    1    $1    $2    $0    {$5}1    $4    $3
+    2    $8    $6    $0    {$5}2    $4    $7
+    ...
+```
+
+## Benchmark (tiktoken cl100k_base, measured)
+
+| file | JSON compact | JTF v1 | JTF v2 | v2 vs JSON | v2 vs v1 |
+|------|-------------|--------|--------|-----------|---------|
 | config.json | 133 | 154 | 133 | +0.0% | +13.6% |
 | users_table.json | 294 | 215 | 214 | +27.2% | +0.5% |
 | api_response.json | 289 | 303 | 299 | -3.5% | +1.3% |
 | logs.json | 556 | 448 | 399 | +28.2% | +10.9% |
 | repeated_values.json | 794 | 623 | 364 | +54.2% | +41.6% |
 | nested_uniform.json | 759 | 990 | 473 | +37.7% | +52.2% |
-| **ИТОГО** | **2825** | **2733** | **1882** | **+33.4%** | **+31.1%** |
+| **TOTAL** | **2825** | **2733** | **1882** | **+33.4%** | **+31.1%** |
 
-Положительный % — токены сэкономлены относительно базы. Отрицательный — регрессия.
+Positive % = tokens saved vs that baseline. Negative % = regression.
 
-`api_response.json` — единственный случай, где JTF v2 хуже компактного JSON (-3.5%):
-маленький документ с уникальными ключами и URL, глубокой вложенностью и без повторов,
-которые оправдали бы словарь. Сжать ниже информационного объёма компактного JSON
-нельзя. При этом JTF v2 лучше JTF v1 и здесь (+1.3%).
+`api_response.json` is the one case where JTF v2 is worse than compact JSON (-3.5%).
+It is a small document with unique keys and URLs, deep nesting, and no repeated
+string values large enough to warrant a dictionary. The format cannot compress it
+below the information content that compact JSON already achieves. JTF v2 is better
+than JTF v1 on this file (+1.3%).
 
-`config.json` выходит ровно в 0% против компактного JSON (было -15.8% у JTF v1) —
-за счёт разделителя `ключ=значение`.
+`config.json` breaks even at exactly 0% vs compact JSON, improved from -15.8% in
+JTF v1 thanks to the `key=value` separator change.
 
-## Установка
+`nested_uniform.json` shows the largest gain for a single file: 37.7% vs compact
+JSON, with nested tabular encoding reducing 759 tokens to 473.
+
+## Installation
 
 ```sh
 python3 -m venv venv
@@ -158,10 +191,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Сам конвертер (`encode`/`decode`) работает на чистом стандартном Python — зависимостей
-нет. `tiktoken` нужен только для команды `bench`.
-
-## Использование
+## Usage
 
 ```sh
 python3 jtf.py encode file.json [-o output.jtf]
@@ -169,44 +199,48 @@ python3 jtf.py decode file.jtf  [-o output.json]
 python3 jtf.py bench  file.json
 ```
 
-`encode` читает JSON и пишет JTF в stdout (или в `-o file`). `decode` читает JTF и
-пишет JSON. `bench` печатает таблицу сравнения токенов (компактный JSON / JTF v1 / JTF v2).
+`encode` reads a JSON file and writes JTF to stdout (or `-o file`).
 
-## Тесты
+`decode` reads a JTF file and writes pretty-printed JSON to stdout (or `-o file`).
+
+`bench` prints a table comparing token counts for compact JSON, JTF v1, and JTF v2
+for a single file.
+
+## Running tests
 
 ```sh
-venv/bin/python tests/test_roundtrip.py   # 76 тестов, все проходят
-venv/bin/python tests/benchmark.py        # печатает таблицу выше
+venv/bin/python tests/test_roundtrip.py   # 76 tests, all pass
+venv/bin/python tests/benchmark.py        # prints the table above
 ```
 
-Гарантия round-trip: `decode(encode(x)) == x` для любого JSON-сериализуемого объекта.
-76 кейсов покрывают: все примеры, `null`/`true`/`false`/пустые значения, строки,
-похожие на числа, строки со всеми спецсимволами, глубокую вложенность (5 уровней),
-массивы массивов, смешанные массивы, вложенно-однотипные массивы, граничные случаи
-словаря.
+Round-trip guarantee: `decode(encode(x)) == x` for any JSON-serializable Python
+object. 76 test cases cover: all sample files, null/true/false/empty values,
+numeric-looking strings, strings with every special character, deeply nested
+structures (5 levels), arrays of arrays, mixed arrays, nested-uniform arrays,
+and dictionary boundary cases.
 
 ## API
 
 ```python
 from jtf import encode, decode
 
-text = encode(data)   # объект Python -> строка JTF
-obj  = decode(text)   # строка JTF -> объект Python
+text = encode(data)   # Python object -> JTF string
+obj  = decode(text)   # JTF string -> Python object
 ```
 
-## Когда помогает, а когда нет
+## When JTF v2 helps and when it does not
 
-Помогает сильнее всего:
-- данные — массив объектов с одной схемой (логи, выборки из БД, списки из API);
-- строковые значения повторяются между строками (статусы, регионы, категории, даты);
-- массивы вложенно-однотипных объектов (записи пользователей с адресами и т.п.).
+It helps most when:
+- Data is an array of objects with the same schema (logs, DB results, API lists).
+- String values repeat across rows (statuses, regions, categories, dates).
+- Arrays of nested-uniform objects (user records with addresses, etc.).
 
-Не помогает (может проиграть):
-- маленький документ с уникальными значениями и глубокой вложенностью (`api_response.json`);
-- все значения — большие уникальные строки (выносить нечего);
-- каждый ключ встречается ровно один раз (разделитель `=` экономит 1 токен, но это
-  съедается отсутствием структурной плотности JSON).
+It does not help (may regress) when:
+- The document is small with mostly unique values and deep nesting (`api_response.json`).
+- All values are large unique strings (there is nothing to factor out).
+- Every key appears exactly once (the key=value separator saves 1 token, but this
+  is offset by the absence of JSON's structural compactness).
 
-Компактный JSON — сильная база. JTF v2 — инструмент для подачи данных в промпт, а не
-формат сжатия: он полезнее всего, когда модели нужно прочитать и понять данные, а не
-просто сохранить байты.
+Compact JSON is still a strong baseline. JTF v2 is a prompt-injection tool, not a
+compression format — it is most useful when the LLM needs to read and understand the
+data, not just store bytes.
