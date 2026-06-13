@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "url": "https://api.example.com/v2/users/1"
+  },
+  {
+    "id": 2,
+    "url": "https://api.example.com/v2/users/2"
+  },
+  {
+    "id": 3,
+    "url": "https://api.example.com/v2/users/3"
+  },
+  {
+    "id": 4,
+    "url": "https://api.example.com/v2/users/4"
+  }
+]

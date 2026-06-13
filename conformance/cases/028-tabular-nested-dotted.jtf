@@ -1,0 +1,4 @@
+#3 id addr.city addr.zip
+	1	Moscow	"101000"
+	2	Kazan	"420000"
+	3	Samara	"443000"

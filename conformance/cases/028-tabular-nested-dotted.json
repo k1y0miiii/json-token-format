@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "addr": {
+      "city": "Moscow",
+      "zip": "101000"
+    }
+  },
+  {
+    "id": 2,
+    "addr": {
+      "city": "Kazan",
+      "zip": "420000"
+    }
+  },
+  {
+    "id": 3,
+    "addr": {
+      "city": "Samara",
+      "zip": "443000"
+    }
+  }
+]

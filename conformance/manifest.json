@@ -1,0 +1,276 @@
+{
+  "version": "1.0",
+  "count": 45,
+  "cases": [
+    {
+      "id": "001",
+      "name": "scalar-null",
+      "input": "001-scalar-null.json",
+      "expected": "001-scalar-null.jtf"
+    },
+    {
+      "id": "002",
+      "name": "scalar-true",
+      "input": "002-scalar-true.json",
+      "expected": "002-scalar-true.jtf"
+    },
+    {
+      "id": "003",
+      "name": "scalar-false",
+      "input": "003-scalar-false.json",
+      "expected": "003-scalar-false.jtf"
+    },
+    {
+      "id": "004",
+      "name": "scalar-int",
+      "input": "004-scalar-int.json",
+      "expected": "004-scalar-int.jtf"
+    },
+    {
+      "id": "005",
+      "name": "scalar-int-zero",
+      "input": "005-scalar-int-zero.json",
+      "expected": "005-scalar-int-zero.jtf"
+    },
+    {
+      "id": "006",
+      "name": "scalar-int-negative",
+      "input": "006-scalar-int-negative.json",
+      "expected": "006-scalar-int-negative.jtf"
+    },
+    {
+      "id": "007",
+      "name": "scalar-float",
+      "input": "007-scalar-float.json",
+      "expected": "007-scalar-float.jtf"
+    },
+    {
+      "id": "008",
+      "name": "scalar-float-negative",
+      "input": "008-scalar-float-negative.json",
+      "expected": "008-scalar-float-negative.jtf"
+    },
+    {
+      "id": "009",
+      "name": "scalar-float-small",
+      "input": "009-scalar-float-small.json",
+      "expected": "009-scalar-float-small.jtf"
+    },
+    {
+      "id": "010",
+      "name": "scalar-string",
+      "input": "010-scalar-string.json",
+      "expected": "010-scalar-string.jtf"
+    },
+    {
+      "id": "011",
+      "name": "scalar-empty-string",
+      "input": "011-scalar-empty-string.json",
+      "expected": "011-scalar-empty-string.jtf"
+    },
+    {
+      "id": "012",
+      "name": "numbers-mixed-array",
+      "input": "012-numbers-mixed-array.json",
+      "expected": "012-numbers-mixed-array.jtf"
+    },
+    {
+      "id": "013",
+      "name": "numbers-floats",
+      "input": "013-numbers-floats.json",
+      "expected": "013-numbers-floats.jtf"
+    },
+    {
+      "id": "014",
+      "name": "numbers-numeric-strings",
+      "input": "014-numbers-numeric-strings.json",
+      "expected": "014-numbers-numeric-strings.jtf"
+    },
+    {
+      "id": "015",
+      "name": "empty-object",
+      "input": "015-empty-object.json",
+      "expected": "015-empty-object.jtf"
+    },
+    {
+      "id": "016",
+      "name": "empty-array",
+      "input": "016-empty-array.json",
+      "expected": "016-empty-array.jtf"
+    },
+    {
+      "id": "017",
+      "name": "empty-object-value",
+      "input": "017-empty-object-value.json",
+      "expected": "017-empty-object-value.jtf"
+    },
+    {
+      "id": "018",
+      "name": "empty-array-value",
+      "input": "018-empty-array-value.json",
+      "expected": "018-empty-array-value.jtf"
+    },
+    {
+      "id": "019",
+      "name": "empty-nested",
+      "input": "019-empty-nested.json",
+      "expected": "019-empty-nested.jtf"
+    },
+    {
+      "id": "020",
+      "name": "nulls-in-object",
+      "input": "020-nulls-in-object.json",
+      "expected": "020-nulls-in-object.jtf"
+    },
+    {
+      "id": "021",
+      "name": "object-flat",
+      "input": "021-object-flat.json",
+      "expected": "021-object-flat.jtf"
+    },
+    {
+      "id": "022",
+      "name": "object-reserved-keys",
+      "input": "022-object-reserved-keys.json",
+      "expected": "022-object-reserved-keys.jtf"
+    },
+    {
+      "id": "023",
+      "name": "object-nested",
+      "input": "023-object-nested.json",
+      "expected": "023-object-nested.jtf"
+    },
+    {
+      "id": "024",
+      "name": "object-deep-5-levels",
+      "input": "024-object-deep-5-levels.json",
+      "expected": "024-object-deep-5-levels.jtf"
+    },
+    {
+      "id": "025",
+      "name": "tabular-flat",
+      "input": "025-tabular-flat.json",
+      "expected": "025-tabular-flat.jtf"
+    },
+    {
+      "id": "026",
+      "name": "tabular-flat-with-nulls",
+      "input": "026-tabular-flat-with-nulls.json",
+      "expected": "026-tabular-flat-with-nulls.jtf"
+    },
+    {
+      "id": "027",
+      "name": "tabular-key-with-space",
+      "input": "027-tabular-key-with-space.json",
+      "expected": "027-tabular-key-with-space.jtf"
+    },
+    {
+      "id": "028",
+      "name": "tabular-nested-dotted",
+      "input": "028-tabular-nested-dotted.json",
+      "expected": "028-tabular-nested-dotted.jtf"
+    },
+    {
+      "id": "029",
+      "name": "array-primitive-ints",
+      "input": "029-array-primitive-ints.json",
+      "expected": "029-array-primitive-ints.jtf"
+    },
+    {
+      "id": "030",
+      "name": "array-primitive-strings",
+      "input": "030-array-primitive-strings.json",
+      "expected": "030-array-primitive-strings.jtf"
+    },
+    {
+      "id": "031",
+      "name": "array-mixed-primitives",
+      "input": "031-array-mixed-primitives.json",
+      "expected": "031-array-mixed-primitives.jtf"
+    },
+    {
+      "id": "032",
+      "name": "array-of-arrays",
+      "input": "032-array-of-arrays.json",
+      "expected": "032-array-of-arrays.jtf"
+    },
+    {
+      "id": "033",
+      "name": "array-heterogeneous",
+      "input": "033-array-heterogeneous.json",
+      "expected": "033-array-heterogeneous.jtf"
+    },
+    {
+      "id": "034",
+      "name": "array-empty-objects",
+      "input": "034-array-empty-objects.json",
+      "expected": "034-array-empty-objects.jtf"
+    },
+    {
+      "id": "035",
+      "name": "unicode-cyrillic",
+      "input": "035-unicode-cyrillic.json",
+      "expected": "035-unicode-cyrillic.jtf"
+    },
+    {
+      "id": "036",
+      "name": "unicode-emoji",
+      "input": "036-unicode-emoji.json",
+      "expected": "036-unicode-emoji.jtf"
+    },
+    {
+      "id": "037",
+      "name": "unicode-tabular",
+      "input": "037-unicode-tabular.json",
+      "expected": "037-unicode-tabular.jtf"
+    },
+    {
+      "id": "038",
+      "name": "escape-special-chars",
+      "input": "038-escape-special-chars.json",
+      "expected": "038-escape-special-chars.jtf"
+    },
+    {
+      "id": "039",
+      "name": "escape-keys",
+      "input": "039-escape-keys.json",
+      "expected": "039-escape-keys.jtf"
+    },
+    {
+      "id": "040",
+      "name": "dict-repeated-values",
+      "input": "040-dict-repeated-values.json",
+      "expected": "040-dict-repeated-values.jtf"
+    },
+    {
+      "id": "041",
+      "name": "dict-url-prefix",
+      "input": "041-dict-url-prefix.json",
+      "expected": "041-dict-url-prefix.jtf"
+    },
+    {
+      "id": "042",
+      "name": "dict-exact-values",
+      "input": "042-dict-exact-values.json",
+      "expected": "042-dict-exact-values.jtf"
+    },
+    {
+      "id": "043",
+      "name": "dict-not-profitable",
+      "input": "043-dict-not-profitable.json",
+      "expected": "043-dict-not-profitable.jtf"
+    },
+    {
+      "id": "044",
+      "name": "nested-array-in-object",
+      "input": "044-nested-array-in-object.json",
+      "expected": "044-nested-array-in-object.jtf"
+    },
+    {
+      "id": "045",
+      "name": "combined-realistic",
+      "input": "045-combined-realistic.json",
+      "expected": "045-combined-realistic.jtf"
+    }
+  ]
+}

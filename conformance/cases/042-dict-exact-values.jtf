@@ -1,0 +1,17 @@
+#vdf:v2
+#dict:
+  $0=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  $1=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+  $2=cccccccccccccccccccccccccccccccccccccccc
+  $3=dddddddddddddddddddddddddddddddddddddddd
+  $4=eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+  $5=ffffffffffffffffffffffffffffffffffffffff
+  $6=gggggggggggggggggggggggggggggggggggggggg
+  $7=hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+  $8=iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+  $9=jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+  $10=kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+#end
+#2 k0 k1 k2 k3 k4 k5 k6 k7 k8 k9 k10
+	$0	$1	$2	$3	$4	$5	$6	$7	$8	$9	$10
+	$0	$1	$2	$3	$4	$5	$6	$7	$8	$9	$10

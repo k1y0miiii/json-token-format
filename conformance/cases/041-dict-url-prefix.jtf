@@ -1,0 +1,9 @@
+#vdf:v2
+#dict:
+  $0~="https://api.example.com/v2/users/"
+#end
+#4 id url
+	1	{$0}1
+	2	{$0}2
+	3	{$0}3
+	4	{$0}4

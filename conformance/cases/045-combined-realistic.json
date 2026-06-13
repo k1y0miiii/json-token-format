@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "requestId": "req_8f2a",
+    "tookMs": 42,
+    "apiVersion": "2026-04-01"
+  },
+  "page": {
+    "n": 1,
+    "size": 12,
+    "total": 87
+  },
+  "data": [
+    {
+      "id": 100001,
+      "title": "Add dark mode",
+      "state": "open",
+      "comments": 2
+    },
+    {
+      "id": 100002,
+      "title": "Fix memory leak",
+      "state": "closed",
+      "comments": 7
+    },
+    {
+      "id": 100003,
+      "title": "Improve docs",
+      "state": "open",
+      "comments": 0
+    }
+  ],
+  "tags": [
+    "bug",
+    "docs",
+    "question"
+  ]
+}

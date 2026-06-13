@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "status": "active",
+    "plan": "premium",
+    "region": "eu-west-1",
+    "tier": "gold"
+  },
+  {
+    "id": 2,
+    "status": "pending",
+    "plan": "basic",
+    "region": "eu-west-1",
+    "tier": "silver"
+  },
+  {
+    "id": 3,
+    "status": "active",
+    "plan": "premium",
+    "region": "eu-west-1",
+    "tier": "gold"
+  },
+  {
+    "id": 4,
+    "status": "suspended",
+    "plan": "basic",
+    "region": "us-east-1",
+    "tier": "bronze"
+  },
+  {
+    "id": 5,
+    "status": "active",
+    "plan": "premium",
+    "region": "eu-west-1",
+    "tier": "gold"
+  },
+  {
+    "id": 6,
+    "status": "pending",
+    "plan": "basic",
+    "region": "ap-south-1",
+    "tier": "silver"
+  },
+  {
+    "id": 7,
+    "status": "active",
+    "plan": "premium",
+    "region": "eu-west-1",
+    "tier": "gold"
+  },
+  {
+    "id": 8,
+    "status": "suspended",
+    "plan": "basic",
+    "region": "us-east-1",
+    "tier": "bronze"
+  }
+]

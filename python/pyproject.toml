@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "jtf"
+version = "1.0.0"
+description = "JTF — JSON Token Format: a lossless, token-efficient JSON encoding for LLM prompts"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Maxim Chumakov" }]
+keywords = ["json", "llm", "tokens", "tiktoken", "encoding", "prompt"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Text Processing :: Markup",
+]
+dependencies = []
+
+[project.optional-dependencies]
+# Real GPT-family tokenizer for production-grade dictionary decisions.
+tiktoken = ["tiktoken>=0.5"]
+dev = ["pytest>=7"]
+
+[project.scripts]
+jtf = "jtf.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/k1y0miiii/jtf"
+Specification = "https://github.com/k1y0miiii/jtf/blob/main/SPEC.md"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/jtf"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

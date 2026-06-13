@@ -1,0 +1,9 @@
+#8 id status plan region tier
+	1	active	premium	eu-west-1	gold
+	2	pending	basic	eu-west-1	silver
+	3	active	premium	eu-west-1	gold
+	4	suspended	basic	us-east-1	bronze
+	5	active	premium	eu-west-1	gold
+	6	pending	basic	ap-south-1	silver
+	7	active	premium	eu-west-1	gold
+	8	suspended	basic	us-east-1	bronze

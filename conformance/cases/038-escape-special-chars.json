@@ -1,0 +1,13 @@
+{
+  "eq": "key=value",
+  "colon": "key: value",
+  "tab": "a\tb",
+  "newline": "line1\nline2",
+  "comma": "one, two",
+  "quote": "say \"hi\"",
+  "backslash": "C:\\Users\\x",
+  "hash": "#tag",
+  "dollar": "$money",
+  "at": "@handle",
+  "pipe": "a|b"
+}

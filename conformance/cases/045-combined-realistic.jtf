@@ -1,0 +1,13 @@
+meta:
+	requestId=req_8f2a
+	tookMs=42
+	apiVersion=2026-04-01
+page:
+	n=1
+	size=12
+	total=87
+data:#3 id title state comments
+	100001	Add dark mode	open	2
+	100002	Fix memory leak	closed	7
+	100003	Improve docs	open	0
+tags=[3] bug,docs,question

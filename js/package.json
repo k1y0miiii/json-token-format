@@ -1,0 +1,24 @@
+{
+  "name": "@jtf/jtf",
+  "version": "1.0.0",
+  "description": "JTF — JSON Token Format: a lossless, token-efficient JSON encoding for LLM prompts",
+  "type": "module",
+  "main": "src/jtf.js",
+  "exports": {
+    ".": "./src/jtf.js",
+    "./cost": "./src/cost.js"
+  },
+  "bin": {
+    "jtf": "bin/jtf.js"
+  },
+  "files": ["src", "bin"],
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": ["json", "llm", "tokens", "tiktoken", "encoding", "prompt"],
+  "author": "Maxim Chumakov",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
